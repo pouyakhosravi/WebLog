@@ -1,0 +1,423 @@
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1100px) {
+
+    .lg-1 {width: 8.33%;}
+    .lg-2 {width: 16.66%;}
+    .lg-3 {width: 25%;}
+    .lg-4 {width: 33.33%;}
+    .lg-5 {width: 41.66%;}
+    .lg-6 {width: 50%;}
+    .lg-7 {width: 58.33%;}
+    .lg-8 {width: 66.66%;}
+    .lg-9 {width: 75%;}
+    .lg-10 {width: 83.33% !important;}
+    .lg-11 {width: 91.66%;}
+    .lg-12 {width: 100%;}
+}
+
+@media only screen and (max-width: 990px) {
+
+    .fields .inputs{
+        width: 80% !important;
+    }
+    .md-1 {width: 8.33%;}
+    .md-2 {width: 16.66%;}
+    .md-3 {width: 25%;}
+    .md-4 {width: 33.33%;}
+    .md-5 {width: 41.66% !important;}
+    .md-6 {width: 50% !important;}
+    .md-7 {width: 58.33% !important;}
+    .md-8 {width: 66.66%;}
+    .md-9 {width: 75%;}
+    .md-10 {width: 83.33%;}
+    .md-11 {width: 91.66%;}
+    .md-12 {width: 100% !important;}
+}
+
+@media only screen and (max-width: 800px) {
+
+    .singUp-parent{
+        flex-wrap: wrap;
+    }
+
+    .fields .inputs {
+        margin-bottom: 25px !important;
+    }
+
+    .otherSolution{
+        height: 210px !important;
+    }
+
+    .singUpButtons{
+        height: 150px !important;
+    }
+
+    .otherSolution .or{
+        top: 0px !important;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -50%) !important;
+    }
+
+    .sm-1 {width: 8.33%;}
+    .sm-2 {width: 16.66%;}
+    .sm-3 {width: 25%;}
+    .sm-4 {width: 33.33%;}
+    .sm-5 {width: 41.66% !important;}
+    .sm-6 {width: 50%;}
+    .sm-7 {width: 58.33% !important;}
+    .sm-8 {width: 66.66%;}
+    .sm-9 {width: 75%;}
+    .sm-10 {width: 83.33%;}
+    .sm-11 {width: 91.66% !important;}
+    .sm-12 {width: 100% !important;}
+}
+
+@media only screen and (max-width: 550px) {
+
+    .fields .inputs {
+        height: auto !important;
+    }
+
+    .form1 .nameFields {
+        border: none !important;
+    }
+
+    .phoneCard{
+        margin-bottom: 65px !important;
+    }
+
+    .forms{
+        flex-wrap: wrap;
+    }
+
+    .v-sm-1 {width: 8.33%;}
+    .v-sm-2 {width: 16.66%;}
+    .v-sm-3 {width: 25%;}
+    .v-sm-4 {width: 33.33%;}
+    .v-sm-5 {width: 41.66% !important;}
+    .v-sm-6 {width: 50%;}
+    .v-sm-7 {width: 58.33% !important;}
+    .v-sm-8 {width: 66.66%;}
+    .v-sm-9 {width: 75%;}
+    .v-sm-10 {width: 83.33%;}
+    .v-sm-11 {width: 91.66% !important;}
+    .v-sm-12 {width: 100% !important;}
+}
+
+@font-face{
+    font-family: VazirFont;
+    src: url(../Vazir-FD.woff2);
+}
+
+body{
+    background-image: url(../Images/book.jpg);
+    background-size: contain;
+}
+
+/* style for logo in sing up page */
+.myLogo{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(85, 250, 250, 0.198);
+}
+
+.myLogo img{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin: 5px 0px 5px 0px;
+}
+
+.hvr:hover{
+    cursor: pointer;
+}
+
+/* style for inputs */
+.singUp-parent{
+    width: 100%;
+    height: auto;
+    direction: rtl;
+    display: flex;
+    font-family: VazirFont;
+    margin-top: 10px;
+}
+
+.singUp-parent .fields{
+    width: 60%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.fields .inputs{
+    width: 90%;
+    height: 500px;
+    border-radius: 10px;
+    border: solid 1px teal;
+    background-color: rgba(85, 250, 250, 0.198);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    direction: rtl;
+    color: skyblue;
+    position: relative;
+}
+
+.singUp-parent .otherSolution{
+    height: 500px;
+    width: 40%;
+    position: relative;
+    border-right: solid 2px skyblue;
+}
+
+.otherSolution .singUpButtons{
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px teal;
+    border-radius: 5px;
+    background-color: rgba(85, 250, 250, 0.198);
+}
+
+.otherSolution .or{
+    width: 50px;
+    height: 50px;
+    background-color: skyblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    /* bring your own prefixes */
+    transform: translate(50%, -50%);
+}
+
+.singUpButtons button{
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+#googleButton{
+    background-color: red;
+}
+
+#facebookButton{
+    background-color: royalblue;
+}
+
+/* style for forms */
+.inputs .title{
+    margin: 0px;
+    font-weight: bolder;
+    text-align: center;
+    background-color: teal;
+}
+
+.forms{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.forms .form1, .forms .form2{
+    width: 50%;
+}
+
+/* style inputs */
+.card{
+    text-align: right;
+    background-color: transparent;
+    border: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.card label{
+    margin-right: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.forms input{
+    outline: none;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 3px;
+    height: 35px;
+}
+
+.form1 .nameFields{
+    border-left: solid 2px teal;
+}
+
+/* style for rb */
+.genderFields {
+    margin: 20px 10px 10px 10px;
+    border-top: solid 2px teal;
+}
+
+.genderFields h5{
+    text-align: center;
+    font-weight: bold;
+}
+
+.custom-radio{
+    text-align: right;
+    flex-wrap: wrap-reverse;
+}
+
+.custom-radio label{
+    margin-right: 25px;
+}
+
+/* date picker style */
+.myDatePicker{
+    direction: rtl;
+    text-align: right;
+}
+
+#tavallodParent{
+    display: flex;
+}
+
+#taghvimIcon{
+    height: 100%;
+    width: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+
+#tavallod{
+    width: 100%;
+}
+
+#plotId{
+    width: 320px;
+}
+
+/* style form 2 */
+.passValid, .retryPassValid{
+    display: flex;
+}
+.passValid input, .retryPassValid input{
+    border-radius: 0px;
+    width: 100%;
+}
+
+.passValid i, .retryPassValid i{
+    font-size: 20px;
+}
+
+.lockIcon{
+    width: 30px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 5px ;
+    border-bottom-right-radius: 5px;
+    background-color: gray;
+}
+
+.eyeIcon{
+    width: 30px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 5px ;
+    border-bottom-left-radius: 5px;
+    background-color: gray;
+}
+
+.phone {
+    display: flex;
+}
+
+.phone input{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    width: 100%;
+}
+
+.phone .pishShomare{
+    width: 45px;
+    height: 35px;
+    background-color: yellow;
+    border-top-left-radius: 5px ;
+    border-bottom-left-radius: 5px
+}
+
+/* style for drop */
+.dropFields{
+    margin: 20px 10px 26px 10px;
+    border: solid 1px teal;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.dropFields button{
+    width: 100%;
+    direction: ltr;
+    background-color: teal;
+}
+
+.dropFields .dropdown-menu{
+    width: 100% !important;
+    text-align: right;
+}
+
+.dropdown-menu div{
+    padding: 0px;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu div:hover{
+    background-color: royalblue;
+}
+
+
+#countryMenuButton{
+    margin-bottom: 50px;
+}
+
+#sabt{
+    position: absolute;
+    height: 45px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(75, 189, 189);
+    color: white;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -100px;
+}
+
+#sabt:hover{
+    background-color: teal;
+    transition-duration: 0.5s;
+}

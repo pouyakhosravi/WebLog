@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%>
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/singUp.css">
+    <title>ثبت نام</title>
+</head>
+
+<body>
+
+    <div class="myLogo">
+        <img class="hvr" src="../../Images/logo.png" alt="article-logo">
+    </div>
+    <div class="singUp-parent">
+        <div class="fields sm-12">
+            <div class="inputs">
+                <p class="title">فرم ثبت نام</p>
+                <div class="forms">
+                    <div class="form1 v-sm-12">
+                        <div class="nameFields">
+                            <div class="card">
+                                <label class="hvr" for="userName"> نام کاربری: </label>
+                                <input class="hvr" type="text" id="userName" placeholder="نام کاربری:">
+                                <div class="feedBack"></div>
+                            </div>
+                            <div class="card">
+                                <label class="hvr" for="firstName"> نام: </label>
+                                <input class="hvr" type="text" id="firstName" placeholder="نام">
+                                <div class="feedBack"></div>
+                            </div>
+                            <div class="card">
+                                <label class="hvr" for="lastName"> نام خانوادگی: </label>
+                                <input class="hvr" type="text" id="lastName" placeholder= "نام خانوادگی">
+                                <div class="feedBack"></div>
+                            </div>
+                        </div>
+                        <div class="genderFields">
+                            <h5>جنسیت</h5>
+                            <div class="custom-control custom-radio">
+                                <input value="اقا" type="radio" id="male" name="gender" class="hvr custom-control-input" checked>
+                                <label class="hvr custom-control-label" for="male">آقا</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input value="خانم" type="radio" id="female" name="gender" class="hvr custom-control-input">
+                                <label class="hvr custom-control-label" for=female>خانم</label>
+                            </div>
+                        </div>
+                        <div class="myDatePicker">
+                            <label for="tavallod">تاریخ تولد :</label>
+                            <div id="tavallodParent">
+                                <div id="taghvimIcon"> <i class="fas fa-calendar-alt"></i> </div>
+                                <input type="text" class="hvr observer-example" id="tavallod"/>
+                            </div>
+                            <div class="valid-feedback"> </div>
+                        </div>
+                    </div>
+                    <div class="form2 v-sm-12">
+                        <div class="passFields">
+                            <div class="card">
+                                <label class="hvr" for="password"> رمز عبور: </label>
+                                <div class="passValid">
+                                    <div class="lockIcon"> <i class="fas fa-lock"></i> </div>
+                                    <input class="hvr" type="password" id="password" placeholder= "رمز عبور">
+                                    <div class="hvr eyeIcon"> <i class="fas fa-eye"></i> </div>
+                                </div>
+                                <div class="feedBack"></div>
+                            </div>
+                            <div class="card">
+                                <label class="hvr" for="retryPassword"> تکرار رمز عبور: </label>
+                                <div class="retryPassValid">
+                                    <div class="lockIcon"> <i class="fas fa-lock"></i> </div>
+                                    <input class="hvr" type="password" id="retryPassword" placeholder= "تکرار رمز عبور">
+                                    <div class="hvr eyeIcon"> <i class="fas fa-eye"></i> </div>
+                                </div>
+                                <div class="feedBack"></div>
+                            </div>
+                        </div>
+                        <div class="dropFields">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="countryMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    انتخاب کشور
+                                </button>
+                                <div class="dropdown-menu" id="countryMenu" aria-labelledby="dropdownMenuButton">
+                                    <div>انتخاب کنید</div>
+                                </div>
+                            </div>
+
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="cityMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    انتخاب شهر
+                                </button>
+                                <div class="dropdown-menu" id="cityMenu" aria-labelledby="dropdownMenuButton">
+                                    <div>ابتدا کشور را انتخاب کنید</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card phoneCard">
+                            <label class="hvr" for="phoneNumber"> شماره تلفن: </label>
+                            <div class="phone">
+                                <input class="hvr" type="tel" id="phoneNumber" placeholder= "شماره تلفن">
+                                <div class="pishShomare"> </div>
+                            </div>
+                            <div class="feedBack"></div>
+                        </div>
+                    </div>
+                    <button id="sabt" > تکمیل ثبت نام </button>
+                </div>
+            </div>
+        </div>
+        <div class="otherSolution sm-12">
+            <div class="or"> یا </div>
+            <div class="singUpButtons">
+                <button id="googleButton">ورود با اکانت گوگل</button>
+                <button id="facebookButton">ورود با اکانت فیس بوک</button>
+            </div>
+        </div>
+    </div>
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <!-- local js -->
+    <script src="../../JS/singUp.js"></script>
+</body>
+
+</html>
+

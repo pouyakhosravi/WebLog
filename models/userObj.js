@@ -53,6 +53,19 @@ const UserSchema = new Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+    country:{
+        type: String,
+        trim: true,
+        default: "none"
+    },
+    city:{
+        type: String,
+        trim: true,
+        default: "none"
+    },
+    avatar: {
+        type: String
     }
 });
 

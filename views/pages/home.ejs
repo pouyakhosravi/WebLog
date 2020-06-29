@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%> 
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/home.css">
+    <title>صفحه اصلی</title>
+</head>
+
+<body>
+
+    <div class="introduction-parent">
+
+        <!-- video for bach ground -->
+        <video id="background-video" autoplay muted loop>
+            <source src="../../Videos/backGroundVideo.webm" type="video/webm">
+        </video>
+
+        <div class="home-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="myLogo hvr"> <img src="../../Images/logo.png" alt="logo"> </div>
+                <button class="singUp-button">ثبت نام</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <div class="inline">
+                            <span class="between"> <i class="fas fa-home"></i> </span>
+                            <a class="nav-item nav-link active" href="#">صفحه اصلی<span class="sr-only">(current)</span></a>
+                        </div>
+                        <div class="inline">
+                            <span class="between"> <i class="fab fa-readme"></i> </span>
+                            <a class="nav-item nav-link" href="#">درباره ما</a>
+                        </div>
+                        <div class="inline">
+                            <span class="between"> <i class="fas fa-phone"></i> </span>
+                            <a class="nav-item nav-link" href="#">تماس با ما</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="introduction-child">
+            <div class="introVideo md-12">
+                <h1>درباره آرتیکل</h1>
+                <video id="aboutMe-video" controls>
+                    <source src="../../Videos/aboutMe.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="login-parent md-12">
+                <div class="introText md-6 sm-11">
+
+                </div>
+                <div class="loginBox md-6 sm-11">
+                    <h3>ورود به پنل کاربری</h3>
+                    <div id="dialog" style="display: none;"></div>
+                    <div class="card">
+                        <div class="inputs">
+                            <input id="userName" type="text" placeholder="نام کاربری">
+                            <input id="password" type="password" placeholder="رمز عبور">
+                            <span> <i class="fas fa-eye hvr"></i> </span>
+                        </div>
+                        <div class="loginParent">
+                            <button class="login-button">ورود</button>
+                        </div>
+                    </div>
+                    <small class="hvr">رمز عبور خود را فراموش کردید؟!</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <!-- local file -->
+    <script src="../../JS/home.js"></script>
+</body>
+
+</html>

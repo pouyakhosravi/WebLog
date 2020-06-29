@@ -7,7 +7,7 @@ async function initialize() {
         let existAdmin = await userObj.findOne({role: "admin"});
         if(existAdmin)
         {
-            return console.log("ادمین قبلا ساخته شده");
+            return console.log("The admin already exists");
         }
 
         const ADMIN = new userObj({
@@ -20,13 +20,42 @@ async function initialize() {
             password: '123456789'
         });
 
-        await ADMIN.save();
+        // ========== use of promise ==========
+        let savePromise = await new Promise(function (resolve, reject) {
 
-        console.log('Admin Created');
+            ADMIN.save(function (err, admin) {
+                if(err)
+                {
+                    reject("ERROR: " + err);
+                }
+                else
+                {
+                    resolve("Admin Saved");
+                }
+            })
+            
+        });
+        //در صورتی که اویت بزاریم
+        console.log(savePromise);
+        
+        //اگر اویت نزاریم
+        // savePromise.then(
+        //     function (result) {
+        //         console.log(result);
+        //     }
+        // ).catch(
+        //     function (error) {
+        //         console.log(error);
+        //     }
+        // );
+
+        // ============ use other solution ============
+        // await ADMIN.save();
+        // console.log('Admin Created');
     } 
-    catch (error) 
+    catch (error1) 
     {
-        console.log("Error In Save Admin: " + error);
+        console.log("Error In Save Admin: " + error1);
     }
 };
 
