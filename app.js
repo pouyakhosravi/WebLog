@@ -6,22 +6,35 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const apiRout = require("./routes/apiRout.js");
+const path = require("path");
 require("./tools/initialization.js");
+
+// view engine setup
+app.set('view engine', 'ejs');
+
+//connect app to mongoDatabase
+mongoose.connect(
+    "mongodb://localhost:27017/WebBlog",
+    {
+        useFindAndModify: false,
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
+
+//set publicFile static
+app.use("/", express.static("public"));
+
+//for use body parser
+app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 
 //for use cookieParser
 app.use(cookieParser());
 
-//check request for cookies
-app.use(function(req, res, next) {
-    
-	if (req.cookies.user_sid && !req.session.user) {
-		res.clearCookie("user_sid");
-	};
-
-	next();
-});
-
-//for set seasion
+//for set session
 // req.session = session
 // initialize express-session to allow us track the logged-in user across sessions.
 app.use(session({
@@ -34,32 +47,21 @@ app.use(session({
     }
 }));
 
-//for use body parser
-app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
-app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
-
-//connect app to mongoDatabase
-mongoose.connect(
-    "mongodb://localhost:27017/WebBlog",
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-);
-// handle mongoose collection.ensureIndex warn
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-
-// view engine setup
-app.set('view engine', 'ejs');
-
-//set publicFile static
-app.use("/", express.static("public"));
+// check request for compar cookies on client and session on server
+app.use(function(req, res, next) {
+	if (req.cookies.user_sid && !req.session.user) {
+		res.clearCookie("user_sid");
+	};
+	next();
+});
 
 //pass to api rout for divide req
-app.use("/", apiRout);
+app.use("/api", apiRout);
+
+// get home page
+app.get("/", function (req, res) {
+    res.render( path.join(__dirname, "/views/pages/home.ejs"), {isLoggedIn: req.session.user} );
+});
 
 //set port for my app
 app.listen(3000, function () {

@@ -1,3 +1,21 @@
+<!-- for use googleMapApi -->
+<script>
+    function initMap() {
+        let myLatLng = {lat: 35.6892, lng: 51.3890};
+        let map = new google.maps.Map(document.getElementById("map-parent"), {
+        center: myLatLng,
+        zoom: 8
+        });
+        let marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: "your indented location"
+        })
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFRzDhFHBtsnLkLz5-0FW_cXsWd6_cz7c&callback=initMap"async defer></script>
+
+
 <!-- for date picker -->
 <script type="text/javascript">
     $('.observer-example').persianDatepicker({

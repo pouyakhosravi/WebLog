@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+const fs = require("fs");
+const path = require("path");
 
 const UserSchema = new Schema({
     firstName: {
@@ -35,7 +38,8 @@ const UserSchema = new Schema({
     sex: {
         type: String,
         required: true,
-        enum: ['male', 'female']
+        enum: ['اقا', 'خانم'],
+        default: 'اقا'
     },
     mobile: {
         type: String,
@@ -59,14 +63,53 @@ const UserSchema = new Schema({
         trim: true,
         default: "none"
     },
-    city:{
+    mail:{
         type: String,
-        trim: true,
-        default: "none"
+        required: true,
+        unique: true,
+        trim: true
     },
     avatar: {
-        type: String
+        type: String,
+        default: "userDefault.jpg"
     }
+});
+
+
+
+// hash password before save
+UserSchema.pre("save", function (next) {
+    let salt = bcrypt.genSaltSync(10);
+    this.password = bcrypt.hashSync(this.password, salt);
+
+    next();
+});
+
+//delete last avatar
+UserSchema.pre("findOneAndUpdate", async function (next) {
+
+    try 
+    {
+        let thisUser = await this.findOne({_id: this._conditions._id});
+
+        if(thisUser.avatar !== "userDefault.jpg")
+        {
+            try 
+            {
+                fs.unlinkSync(path.join(__dirname, `../public/Avatars/${thisUser.avatar}`));
+            } 
+            catch (error) 
+            {
+                console.log("خطا هنگام پاک کردن اواتار قبلی");
+            }
+        }
+    } 
+    catch (error) 
+    {
+        console.log("خطا: " + error.message);
+    }
+
+    next();
 });
 
 module.exports = mongoose.model('User', UserSchema, "usersInfo");

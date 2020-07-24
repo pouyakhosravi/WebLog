@@ -15,28 +15,32 @@ async function initialize() {
             lastName: 'Khosravi',
             userName: 'pooyakhosravi',
             mobile: '09361000000',
-            sex: 'male',
+            country: "iran",
+            city: "tehran",
+            mail: "pooyakhosravi110@gmail.com",
+            sex: 'اقا',
             role: 'admin',
-            password: '123456789'
+            password: '123456789',
+            avatar: "userDefault.jpg"
         });
 
         // ========== use of promise ==========
-        let savePromise = await new Promise(function (resolve, reject) {
+        // let savePromise = await new Promise(function (resolve, reject) {
 
-            ADMIN.save(function (err, admin) {
-                if(err)
-                {
-                    reject("ERROR: " + err);
-                }
-                else
-                {
-                    resolve("Admin Saved");
-                }
-            })
+        //     ADMIN.save(function (err, admin) {
+        //         if(err)
+        //         {
+        //             reject("ERROR: " + err);
+        //         }
+        //         else
+        //         {
+        //             resolve("Admin Saved");
+        //         }
+        //     })
             
-        });
+        // });
         //در صورتی که اویت بزاریم
-        console.log(savePromise);
+        // console.log(savePromise);
         
         //اگر اویت نزاریم
         // savePromise.then(
@@ -50,8 +54,8 @@ async function initialize() {
         // );
 
         // ============ use other solution ============
-        // await ADMIN.save();
-        // console.log('Admin Created');
+        await ADMIN.save();
+        console.log('Admin Created');
     } 
     catch (error1) 
     {

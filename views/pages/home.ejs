@@ -19,24 +19,31 @@
 
         <div class="home-header">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="myLogo hvr"> <img src="../../Images/logo.png" alt="logo"> </div>
-                <button class="singUp-button">ثبت نام</button>
+                <% if (!isLoggedIn) { %>
+                    <%- include ("../partial/body-logo.ejs") -%> 
+                    <button class="singUp-button">ثبت نام</button>
+                <% } else { %>
+                    <div class="userProfileLogo"> <img src="../../Avatars/<%= isLoggedIn.avatar %>"  alt="logo"> </div>
+                    <a href="/api/logout"><button class="singOut-button">خروج</button></a>
+                <% } %> 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <div class="inline">
-                            <span class="between"> <i class="fas fa-home"></i> </span>
-                            <a class="nav-item nav-link active" href="#">صفحه اصلی<span class="sr-only">(current)</span></a>
-                        </div>
+                        <% if (isLoggedIn) { %>
+                            <div class="inline">
+                                <span class="between"> <i class="fas fa-house-user"></i> </span>
+                                <a class="nav-item nav-link" href="/api/user/dashboard">داشبور شما</a>
+                            </div>
+                        <% } %>
                         <div class="inline">
                             <span class="between"> <i class="fab fa-readme"></i> </span>
-                            <a class="nav-item nav-link" href="#">درباره ما</a>
+                            <a class="nav-item nav-link" href="/api/aboutUs">درباره ما</a>
                         </div>
                         <div class="inline">
                             <span class="between"> <i class="fas fa-phone"></i> </span>
-                            <a class="nav-item nav-link" href="#">تماس با ما</a>
+                            <a class="nav-item nav-link" href="#contactUs-panel">تماس با ما</a>
                         </div>
                     </div>
                 </div>
@@ -51,27 +58,109 @@
             </div>
             <div class="login-parent md-12">
                 <div class="introText md-6 sm-11">
-
+                    <h1>جایی برای بهتر شدن</h1>
+                    <h3>مقاله های علمی خود را با دیگران به اشتراک بگذارید.</h3>
                 </div>
-                <div class="loginBox md-6 sm-11">
-                    <h3>ورود به پنل کاربری</h3>
-                    <div id="dialog" style="display: none;"></div>
-                    <div class="card">
-                        <div class="inputs">
-                            <input id="userName" type="text" placeholder="نام کاربری">
-                            <input id="password" type="password" placeholder="رمز عبور">
-                            <span> <i class="fas fa-eye hvr"></i> </span>
+                <% if (!isLoggedIn) { %>
+                    <div class="loginBox md-6 sm-11">
+                        <h3>ورود به پنل کاربری</h3>
+                        <div id="dialog" style="display: none;"></div>
+                        <div class="card">
+                            <div class="inputs">
+                                <input onkeyup="reset(this)" class="loginInputs" id="userName" type="text" placeholder="نام کاربری">
+                                <input onkeyup="reset(this)" class="loginInputs" id="password" type="password" placeholder="رمز عبور">
+                                <span> <i id="passLoginIcon" class="fas fa-eye hvr"></i> </span>
+                            </div>
+                            <div class="loginParent">
+                                <button class="login-button">ورود</button>
+                            </div>
                         </div>
-                        <div class="loginParent">
-                            <button class="login-button">ورود</button>
+                        <div class="rememberMe">
+                            <input class="hvr" type="checkbox" id="remember">
+                            <label class="hvr" for="remember">مرا به خاطر بسپار</label>
                         </div>
+                        <small class="hvr">رمز عبور خود را فراموش کردید؟!</small>
                     </div>
-                    <small class="hvr">رمز عبور خود را فراموش کردید؟!</small>
-                </div>
+                <% } %>
             </div>
         </div>
     </div>
 
+    <div class="report-panel">
+        <div class="circleParent articleCount sm-12">
+            <div class="circle">
+                <div class="circleContent">
+                    <p>تعداد مقالات:</p>
+                </div>
+                <button id="seeAllArticle">دیدن همه مقاله ها</button>
+            </div>
+        </div>
+        <div class="circleParent visitCount sm-12">
+            <div class="circle">
+                <div class="circleContent">
+                    <p>تعداد بازدید از سایت:</p>
+                </div>
+            </div>
+        </div>
+        <div class="circleParent authorCount sm-12">
+            <div class="circle">
+                <div class="circleContent">
+                    <p>تعداد نویسندگان سایت:</p>
+                </div>
+                <button id="seeAllAouthor">دیدن همه نویسندگان</ذ>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactUs-panel">
+        <div class="forms-contactUs lg-6 sm-12">
+            <div class="child">
+                <div class="names">
+                    <input id="fName" type="text" placeholder="نام:">
+                    <input id="lName" type="text" placeholder="نام خانوادگی:">
+                    <input id="call-mail" type="email" placeholder="ایمیل: *">
+                </div>
+                <div class="text-parent">
+                    <input id="subject" type="text" placeholder="عنوان پیام:">
+                    <textarea id="context" type="text" placeholder="متن پیام:"></textarea>
+                </div>
+                <button>ارسال پیام</button>
+            </div>
+        </div>
+        <div class="callInfo lg-6 sm-12">
+            <div class="callInfo-text">
+                <div class="phoneText">
+                    <span class="icons"> <i class="fas fa-phone"></i> </span> <span>021-50000000</span>
+                </div>
+                <div class="mobileText">
+                    <span class="icons"> <i class="fas fa-mobile-alt"></i> </span> <span>0912-1000000</span>
+                </div>
+                <div class="emailText">
+                    <span class="icons"> <i class="	fas fa-envelope"></i> </span> <span>pooyakhosravi110@gmail.com</span>
+                </div>
+                <div class="locationText">
+                    <span class="icons"> <i class="fas fa-map-marker-alt"></i> </span> <span>تهران-میدان آزادی-کوچه آران</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <span class="hvr linkdin"> <i class="fab fa-linkedin-in"></i> </span>
+                <span class="hvr faceBook"> <i class="fab fa-facebook-f"></i></span>
+                <span class="hvr instagram"> <i class="fa fa-instagram"></i> </span>
+                <span class="hvr twitter"> <i class="fab fa-twitter"></i> </span>
+                <span class="hvr telegram"> <i class="	fab fa-telegram-plane"></i> </span>
+            </div>
+        </div>
+        <div class="map lg-12">
+            <div id="map-parent"></div>
+        </div>
+    </div>
+    <div class="copyRight">
+        <small>Copyright © 2020 Love2Dev. All Rights Reserved</small>
+    </div>
+
+    <div class="goUp">
+        <span title="رفتن به اول صفحه" class="hvr fa fa-arrow-circle-up"> </span>
+    </div>
 
     <%- include ("../partial/body-script.ejs") -%>
     <!-- local file -->
