@@ -2,25 +2,22 @@ const mongoose = require("mongoose");
 
 const ArticleSchema = new mongoose.Schema({
     author: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectID,
         required: true,
-        minlength: 3,
-        maxlength: 30,
-        trim: true
     },
-    title: {
+    description: {
         type: String,
         require: true,
         minlength: 20,
         maxlength: 1000
     },
-    description: {
+    text: {
         type: String,
         require: true,
         minlength: 500,
     },
     createdAt:{
-        type: Date(),
+        type: Date,
         default: Date.now,
     },
     letShow: {
