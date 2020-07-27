@@ -81,6 +81,23 @@
         <div class="hvr changeButton"> <i class="fas fa-sun"></i> </div>
     </div>
 
+    <div class="searchPanel">
+        <span id="closeSearch" class="hvr fa fa-close"></span>
+        <div class="search-line">
+            <input placeholder="جست و جو ..." type="text"> <div class="hvr"> <i class="fa fa-search"></i> </div>
+        </div>
+    </div>
+
+    <div class="create-search">
+        <button title="نوشتن مقاله جدید" id="writeArticle"> <div class="circle"></div> <i class="fa fa-plus"></i> </button>
+        <button title="جست و جو" id="searchArticle"> <div class="circle"></div> <i class="fa fa-search"></i> </button>
+    </div>
+
+    <h3 class="titr">لیست مقاله های شما ...</h3>
+    <div class="yourArticles-parent">
+        
+    </div>
+
     <%- include ("../partial/body-script.ejs") -%>
     <!-- local js -->
     <script src="../../JS/dashboard.js"></script>

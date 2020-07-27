@@ -171,7 +171,6 @@
 
 body, html{
     position: relative;
-    height: 100%;
 }
 
 .hvr:hover{
@@ -180,7 +179,7 @@ body, html{
 
 /* style for header in dashboard */
 .dashboard-header{
-    background-color: antiquewhite;
+    background: linear-gradient(to right, rgb(0, 247, 255) , rgb(0, 153, 255));
     display: flex;
     width: 100%;
     height: auto;
@@ -293,6 +292,7 @@ body, html{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 #seeProfile{
@@ -465,4 +465,211 @@ body, html{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* style for creator & search button */
+.create-search{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
+
+.create-search button{
+    width: 60px;
+    height: 60px;
+    border: solid 1px gray;
+    border-radius: 50%;
+    margin: 10px;
+    font-size: 25px;
+    background-color: transparent;
+    color: gray;
+    outline: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#writeArticle .circle, #searchArticle .circle{
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    top: -2px;
+    left: -2px;
+    transform: scale(0);
+    z-index: -2;
+}
+
+#writeArticle:hover, #searchArticle:hover{
+    color: white;
+}
+
+#writeArticle:hover > .circle, #searchArticle:hover > .circle{
+    background: linear-gradient(to right, rgb(0, 255, 242), rgb(0, 195, 255));
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.5s cubic-bezier(0.32, 1, 0.32, 1) 0ms;
+}
+
+#writeArticle:not(:hover) > .circle, #searchArticle:not( :hover) > .circle{
+    background: linear-gradient(to right, rgb(0, 255, 242), rgb(0, 195, 255));
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all 0.5s cubic-bezier(0.32, 1, 0.32, 1) 0ms;
+}
+
+/* style for search panel */
+.searchPanel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: VazirFont;
+    direction: rtl;
+    text-align: right;
+    height: 200px;
+    width: 90%;
+    background-color: rgb(0, 0, 0, 0.5);
+    color: whitesmoke;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    z-index: 2;
+    display: none;
+}
+
+.searchPanel #closeSearch{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.searchPanel .search-line{
+    display: flex;
+    width: 10%;
+    height: 45px;
+}
+
+.search-line input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-bottom: solid 1px whitesmoke;
+    background-color: transparent;
+    outline: none;
+    color: whitesmoke;
+}
+
+.search-line input::placeholder{
+    color: whitesmoke;
+}
+
+.search-line div{
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    border-bottom: solid 1px whitesmoke;
+}
+
+/* style for titr and article parent */
+.titr{
+    font-family: VazirFont;
+    background-color: gray;
+    margin: 5px 0px 5px 0px;
+    text-align: right;
+    direction: rtl;
+    color: whitesmoke;
+    padding-right: 30px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.yourArticles-parent{
+    width: 100%;
+    height: 500px;
+    border: solid 1px gray;
+    border-radius: 3px;
+    background-color: lightblue;
+    opacity: 0.3;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.articleCard{
+    width: 95%;
+    height: 120px;
+    border: solid 1px red;
+    border-radius: 3px;
+    margin: 10px;
+    direction: rtl;
+    background-color: cornflowerblue;
+}
+
+.articleCard:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.articleCard .state-title-parent{
+    border-bottom: solid 1px red;
+    height: 35%;
+    width: 100%;
+    display: flex;
+}
+
+.articleCard .tools-disc-parent{
+    height: 65%;
+    width: 100%;
+    display: flex;
+}
+
+.tools-disc-parent span{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.state-title-parent .title{
+    width: 80%;
+    border-left:  solid 1px red;
+}
+
+.state-title-parent .state{
+    width: 20%;
+}
+
+.tools-disc-parent .disc{
+    width: 80%;
+    border-left: solid 1px red;
+}
+
+.tools-disc-parent .tools{
+    width: 20%;
+    display: flex;
+}
+
+.tools .tools-read{
+    width: 70%;
+    height: 100%;
+    font-size: 40px;
+}
+
+.tools .tools-del-edit{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
 }

@@ -20,7 +20,8 @@ mongoose.connect(
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
-    }
+    },
+    console.log("connected to main server db")
 );
 
 //set publicFile static
@@ -43,7 +44,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 600000
+        expires: 6000000
     }
 }));
 
@@ -65,5 +66,5 @@ app.get("/", function (req, res) {
 
 //set port for my app
 app.listen(3000, function () {
-    console.log("Server Started On Port: 3000");
+    console.log("Main Server Started On Port: 3000");
 })

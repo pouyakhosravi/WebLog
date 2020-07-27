@@ -6,7 +6,7 @@ $(document).ready(function () {
     $("#caretIcon i").click(function () {
         if($(".dialog2").css("display") === "none")
         {
-            $(this).css({"transform":`rotate(${180}deg)`, "transition-duration":"0.5s"})
+            $(this).css({"transform":`rotate(${180}deg)`, "transition-duration":"0.5s"});
             $(".dialog2").slideDown(400);
             setTimeout(function () {
                 $(".dialog2-name").css({"left":"0px", "transition-duration":"0.5s"});
@@ -22,6 +22,44 @@ $(document).ready(function () {
                 $(".dialog2").slideUp(400);
             }, 400);
         }
+    });
+
+    // hidden dialog 2 if is it show up 95 px
+    $(window).resize(function () {
+        if($(this).width() > 950)
+        {
+            if($(".dialog2").height() !== 0)
+            {
+                $("#caretIcon i").css({"transform":`rotate(${0}deg)`});
+                $(".dialog2").css("display", "none");
+            }
+        }
+    });
+
+    // show search bar
+    $("#searchArticle").click(function () {
+        $("#closeSearch").animate({deg:90}, {duration:"0.5", step: function (now) {
+            $(this).css({ transform: 'rotate(' + now + 'deg)' });
+        }});
+
+        $(".searchPanel").css({"width": `${$(window).width() - 100}`, "height":`${$(window).height() - 100}`, "display":"flex"}).hide().fadeIn();
+        setTimeout(function () {
+            $(".search-line").css({"width":"80%", "transition-duration":"0.3s"});
+        }, 300);
+    });
+
+    // rotate close search panel icon
+    $("#closeSearch").click(function () {
+        $("#closeSearch").animate({deg:0}, {duration:"0.5", step: function (now) {
+            $(this).css({ transform: 'rotate(' + now + 'deg)' });
+        }});
+    })
+
+    // hide searchbar
+    $("#closeSearch").click(function () {
+        $(".search-line").css({"width":"10%", "transition-duration":"0.3s"});
+        $(".searchPanel").fadeOut();
+
     });
 
     //open burger menu in dashboard and close (set animation)
