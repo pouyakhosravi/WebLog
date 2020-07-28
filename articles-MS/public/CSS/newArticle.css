@@ -22,7 +22,6 @@
 
 @media only screen and (max-width: 990px) {
 
-
     .md-1 {width: 8.33%;}
     .md-2 {width: 16.66%;}
     .md-3 {width: 25%;}
@@ -58,13 +57,42 @@
     src: url(../Vazir-FD.woff2);
 }
 
-.description{
-    width: 80%;
-    resize: none;
-    border: none;
-    border-bottom: solid 1px gray;
+body{
+    background: linear-gradient(to bottom right, rgb(132, 0, 255), rgb(184, 143, 250));
 }
 
-.description::placeholder{
-    margin-right: 30px;
+/* style for description */
+.descParent{
+    width: 100;
+    display: flex;
+    justify-content: center;
+    font-family: VazirFont;
+}
+
+#description{
+    width: 80%;
+    height: 100px;
+    resize: none;
+    border-radius: 5px;
+    outline: none;
+    margin: 10px;
+    text-align: right;
+    padding: 10px;
+    overflow: auto;
+}
+
+#description::placeholder{
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: right;
+}
+
+#submitArticle{
+    width: 150px;
+    height: 45px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    margin: 10px;
+    font-family: VazirFont;
 }

@@ -15,8 +15,8 @@ const articleObj = require("../models/articleObj.js");
 // });
 
 // get crate page
-router.get("/writeArticle", function (req, res) {
-    res.render( path.join(__dirname, "../pages/writeArticle.ejs") );
+router.get("/newArticle", function (req, res) {
+    res.render( path.join(__dirname, "../views/pages/newArticle.ejs") );
 });
 
 //create article

@@ -1,4 +1,11 @@
-<!-- for text editor -->
+<!-- for use editor -->
 <script>
-    CKEDITOR.replace( 'editor1' );
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 300,
+            codemirror: { // codemirror options
+                theme: 'monokai'
+            },
+        });
+    });
 </script>
