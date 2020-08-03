@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%>
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/dashboard.css">
+    <title>پروفایل شما</title>
+</head>
+
+<body>
+
+    <div class="dashboard-header">
+
+        <% if (user.role === "admin") { %>
+            <div class="notifications-panel">
+                <div title="مقاله های تایید نشده" class="hvr circle-not article-not">
+                    <i class="fas fa-book"></i>
+                    <% if (articleCount > 0) { %>
+                        <div class="iconNot"><%= articleCount %> </div>
+                    <% } %>
+                </div>
+                <div title="کامنت های تایید نشده" class="hvr circle-not comment-not">
+                    <i class="fa fa-comment"></i>
+                    <% if (user) { %>
+                        <div class="iconNot">2</div>
+                    <% } %>
+                </div>
+                <div title="پیام های خوانده نشده" class="hvr circle-not message-not">
+                    <i class="fa fa-envelope"></i>
+                    <% if (user) { %>
+                        <div class="iconNot">3</div>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="headLinks">
+            <div class="linksParent">
+                <%- include ("../partial/dashboardBody-header.ejs") -%> 
+            </div>
+        </div>
+
+        <div class="headProfile md-12">
+            <div class="leftTools md-6">
+                <span id="caretIcon" style="display: none;"> <i class="hvr fas fa-angle-down"></i> </span>
+                <%- include ("../partial/body-logo.ejs") -%> 
+            </div>
+            <div class="rightTools md-6">
+                <div class=" yourAvatar">
+                    <img  src="../../Avatars/<%=user.avatar %>"  alt="avatar">
+                    <button id="seeProfile" class="avatarButtons">مشاهده پروفایل</button>
+                    <label for="chooseFile" id="addAvatar" class="hvr avatarButtons">افزودن آواتار</label>
+                    <input name="myAvatar" type="file" id="chooseFile" style="display: none;">
+                    <span title="ثبت نهایی آواتار" id="submitAvatar" class="hvr avatarButtons"> <i class="fas fa-check"></i> </span>
+                    <span title="لغو " id="cancelAvatar" class="hvr avatarButtons"> <i class="fas fa-times"></i> </span>
+                </div>
+                <span id="burgerIcon" class="hvr" style="display: none;">
+                    <div id="line1"></div>
+                    <div id="line2"></div>
+                    <div id="line3"></div>
+                </span>
+            </div>
+        </div>
+
+        <div class="headDialog">
+            <div class="welcome"> <span><%= user.firstName + " " + user.lastName %> </span> <span> خوش آمدید.</span></div>
+            <div class="clock"> <span>ساعت:   </span> <span class="clockTxt"></span></div>
+            <div class="date"> <span>تاریخ:   </span> <span class="dateTxt"></span></div>
+            <a href="/api/logout"><div class="exit"><button id="exit">خروج</button></div></a>
+        </div>
+    </div>
+
+    <div class="sideBar">
+        <div class="linksParent2">
+            <%- include ("../partial/dashboardBody-header.ejs") -%> 
+            <div id="link4" class="inline">
+                <span class="between"> <i class="far fa-image"></i> </span>
+                <a><label for="chooseFile" style="margin-bottom: 0px;" class="hvr" id="addAvatar2">افزودن آواتار</label></a>
+                <span title="ثبت نهایی آواتار" id="submitAvatar2" class="hvr"> <i class="fas fa-check"></i> </span>
+                <span title="لغو " id="cancelAvatar2" class="hvr"> <i class="fas fa-times"></i> </span>    
+            </div>
+            <div id="link5" class="inline">
+                <span class="between"> <i class="fas fa-user-cog"></i> </span>
+                <a href="#">ویرایش پروفایل</a>
+            </div>
+            <div id="link6" class="inline">
+                <span class="between"> <i class="fas fa-sign-out-alt"></i> </span>
+                <a href="/api/logout">خروج</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog2" style="display: none;">
+        <div class="dialog2-name">
+            <div class="welcome"> <span><%= user.firstName + " " + user.lastName %> </span> <span> خوش آمدید.</span></div>
+        </div>
+        <div class="dialog2-time">
+            <div class="clock"> <span>ساعت:   </span> <span class="clockTxt"></span></div>
+            <div class="date"> <span>تاریخ:   </span> <span class="dateTxt"></span></div>    
+        </div>
+    </div>
+
+    <div class="change-theme">
+        <div class="hvr changeButton"> <i class="fas fa-sun"></i> </div>
+    </div>
+
+    <div class="searchPanel">
+        <span id="closeSearch" class="hvr fa fa-close"></span>
+        <div class="search-line">
+            <input placeholder="جست و جو ..." type="text"> <div class="hvr"> <i class="fa fa-search"></i> </div>
+        </div>
+    </div>
+
+    <div class="create-search">
+        <button title="نوشتن مقاله جدید" id="writeArticle"> <div class="circle"></div> <i class="fa fa-plus"></i> </button>
+        <button title="جست و جو" id="searchArticle"> <div class="circle"></div> <i class="fa fa-search"></i> </button>
+    </div>
+
+    <h3 class="titr">لیست مقاله های شما ...</h3>
+    <div class="yourArticles-parent">
+        <% if (articles.length) { %>
+            <% for( let i = 0; i < articles.length; i++ ) { %>
+                <%- include ( "../partial/bodyDashboard-articleCards.ejs", {data: articles[i]} ) -%> 
+            <% } %>
+        <% } else { %>
+            هیچ مقاله ای برای نمایش وجود ندارد
+        <% } %> 
+    </div>
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <!-- local js -->
+    <script src="../../JS/dashboard.js"></script>
+</body>
+
+</html>

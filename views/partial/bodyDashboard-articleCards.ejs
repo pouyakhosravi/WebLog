@@ -1,0 +1,31 @@
+<div class="articleCard" style="font-family: VazirFont;">
+    <div class="state-title-parent">
+        <div class="title">
+            <div class="createDate">تاریخ ثبت این مقاله: </div>
+            <div class="date"><%= data.createdAt %></div> 
+        </div>
+        <div class="state">
+            <div class="situation">وضعیت: </div>
+            <% if (data.letShow === true) { %>
+                <div class="ok">تایید شده</div>
+            <% } else { %>
+                <div class="no"> در انتظار تایید</div>
+            <% } %> 
+        </div>
+    </div>
+
+    <div class="tools-disc-parent">
+        <div class="disc">
+            <p>خلاصه این مقاله</p>
+            <%= data.description %> 
+        </div>
+        <div class="tools">
+            <div class="tools-read">
+                <span> <i onclick="getReadPage('<%= data._id %>')"  title="خواندن این مقاله" class="hvr fas fa-book-reader"></i> </span>
+            </div>
+            <div class="tools-del-edit">
+                <span> <i onclick="deleteArticle('<%= data._id %>')" title="حدف این مقاله" class="hvr fas fa-trash-alt"></i> </span>
+            </div>
+        </div>
+    </div>
+</div>

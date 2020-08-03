@@ -1,0 +1,631 @@
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1100px) {
+
+    #aboutMe-video{
+        width: 550px !important;
+        height: 300px !important;
+    }
+
+    #contactUs-panel{
+        flex-wrap: wrap;
+    }
+
+    #map-parent{
+        width: 90% !important;
+    }
+
+    .callInfo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .lg-1 {width: 8.33%;}
+    .lg-2 {width: 16.66% !important;}
+    .lg-3 {width: 25%;}
+    .lg-4 {width: 33.33%;}
+    .lg-5 {width: 41.66% !important;}
+    .lg-6 {width: 50% !important;}
+    .lg-7 {width: 58.33%;}
+    .lg-8 {width: 66.66%;}
+    .lg-9 {width: 75%;}
+    .lg-10 {width: 83.33% !important;}
+    .lg-11 {width: 91.66%;}
+    .lg-12 {width: 100% !important;}
+}
+
+@media only screen and (max-width: 990px) {
+
+    .introduction-child .login-parent {
+        flex-direction: row !important;
+    }
+
+    /* set margin for icons */
+    .between i{
+        margin-left: 15px;
+    }
+
+    .introduction-child {
+        flex-wrap: wrap-reverse !important;
+    }
+
+    .login-parent{
+        display: flex;
+    }
+
+    .login-parent .introText, .login-parent .loginBox {
+        height: 230px !important;
+    }
+
+    /* style circle */
+    .circleParent .circle{
+        width: 210px !important;
+        height: 210px !important;
+    }
+
+    .md-1 {width: 8.33%;}
+    .md-2 {width: 16.66%;}
+    .md-3 {width: 25%;}
+    .md-4 {width: 33.33%;}
+    .md-5 {width: 41.66% !important;}
+    .md-6 {width: 50% !important;}
+    .md-7 {width: 58.33% !important;}
+    .md-8 {width: 66.66%;}
+    .md-9 {width: 75%;}
+    .md-10 {width: 83.33%;}
+    .md-11 {width: 91.66%;}
+    .md-12 {width: 100% !important;}
+}
+
+@media only screen and (max-width: 700px) {
+
+
+    #aboutMe-video{
+        width: 450px !important;
+        height: 250px !important;
+    }
+
+    .login-parent{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .report-panel{
+        flex-wrap: wrap !important;
+    }
+
+    .circleParent .circle{
+        width: 260px !important;
+        height: 260px !important;
+    }
+
+    .report-panel .circleParent {
+        height: 300px !important;
+    }
+
+    .sm-1 {width: 8.33%;}
+    .sm-2 {width: 16.66%;}
+    .sm-3 {width: 25%;}
+    .sm-4 {width: 33.33%;}
+    .sm-5 {width: 41.66% !important;}
+    .sm-6 {width: 50%;}
+    .sm-7 {width: 58.33% !important;}
+    .sm-8 {width: 66.66%;}
+    .sm-9 {width: 75%;}
+    .sm-10 {width: 83.33%;}
+    .sm-11 {width: 91.66% !important;}
+    .sm-12 {width: 100% !important;}
+}
+
+@font-face{
+    font-family: VazirFont;
+    src: url(../Vazir-FD.woff2);
+}
+
+body , html{
+    scroll-behavior: smooth;
+    margin: 0px;
+    overflow-x: hidden;
+}
+
+/* style introduction parent */
+.introduction-parent{
+    width: 100%;
+    height: auto !important;
+    position: relative;
+}
+
+/* set video for back ground */
+#background-video{
+    z-index: -1;
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* set dir for hom page header */
+.bg-light {
+    font-family: VazirFont;
+}
+
+.navbar{
+    height: auto;
+    background-color: rgb(0, 0, 0, 0.5) !important;
+    color: gainsboro;
+}
+
+.home-header{
+    height: auto;
+}
+
+.navbar-collapse {
+    direction: rtl;
+}
+
+.nav-link {
+    padding-left: 1.5rem !important;
+    color: gainsboro !important;
+}
+
+.nav-link:hover{
+    color: rgb(47, 133, 204) !important;
+    transition-duration: 0.5s;
+}
+
+.navbar-collapse .between{
+    margin-top: 9px;
+}
+
+.singUp-button, .singOut-button{
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: solid 1px gainsboro;
+    color: gainsboro;
+    outline: none !important;
+}
+
+.singUp-button:hover, .singOut-button:hover{
+    color: rgb(47, 133, 204);
+    border-color: rgb(47, 133, 204);
+    transition-duration: 0.5s;
+}
+
+.navbar-nav {
+    text-align: right;
+}
+
+.navbar-nav .inline{
+    display: flex;
+}
+
+.myLogo, .userProfileLogo{
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.myLogo img, .userProfileLogo img{
+    width: 50px;
+    height: 50px;
+}
+
+.hvr:hover{
+    cursor: pointer;
+}
+
+.navbar-light .navbar-toggler {
+    border: none;
+    background-color: rgb(255, 255, 255, 0.5);
+}
+
+/* style fo intro-child and this child */
+.introduction-child{
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    font-family: VazirFont;
+    direction: rtl;
+}
+
+.introduction-child .introVideo{
+    width: 60%;
+    border-right: solid 1px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.introduction-child .login-parent{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.login-parent .introText ,.login-parent .loginBox{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* style for login box */
+.card{
+    width: 95%;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0px;
+}
+
+.card .inputs, .card .loginParent{
+    width: 100%;
+    height: 50%;
+}
+
+.card .inputs{
+    display: flex;
+    direction: rtl;
+}
+
+.card .inputs input{
+    width: 50%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
+.card .loginParent button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    color: white;
+    background-color: black;
+    border: none;
+}
+
+.card .loginParent button:hover{
+    background-color: royalblue;
+    transition-duration: 0.5s;
+}
+
+.inputs span{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.loginBox h3{
+    color: royalblue;
+    margin-bottom: 25px !important;
+    text-align: center;
+}
+
+.loginBox small{
+    margin-top: 10px;
+    color: rosybrown;
+}
+
+#userName{
+    border-left: solid 1px gray;
+}
+
+#password{
+    border-right: solid 1px gray;
+}
+
+/* style for place holder after cant login */
+.changeColor::-webkit-input-placeholder {
+    color: red
+}
+
+/* style for about me video */
+#aboutMe-video , #qqq{
+    width: 600px;
+    height: 350px;
+    outline: none;
+}
+
+.introVideo h1{
+    color: gainsboro;
+    margin: 40px 0px 10px 0px;
+}
+
+.introText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: wheat;
+}
+
+.rememberMe{
+    color: gainsboro;
+    margin-top: 5px;
+}
+
+/* style for report panel */
+.report-panel{
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: bisque;
+    font-family: VazirFont;
+    direction: rtl;
+}
+
+.report-panel .circleParent{
+    width: 33.33%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circleParent .circle{
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    border: solid 1px black;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.circle button{
+    width: 150px;
+    height: 35px;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.authorCount .circle:hover #seeAllAouthor, .articleCount .circle:hover #seeAllArticle{
+    bottom: 30px;
+    transition-duration: 0.5s;
+}
+
+/* on hover */
+.authorCount .circle:not( :hover) #seeAllAouthor, .articleCount .circle:not( :hover) #seeAllArticle{
+    bottom: 100%;
+    transition-duration: 0.5s;
+}
+
+.circle button{
+    position: absolute;
+    bottom: 100%;
+}
+
+.circle .circleContent{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.authorCount .circleContent{
+    right: 100%;
+    top: 30px;
+}
+
+.visitCount .circleContent{
+    bottom: 100%;
+}
+
+.articleCount .circleContent{
+    left: 100%;
+    top: 30px;
+}
+
+/* go up style */
+.goUp{
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: inline-block;
+    display: none;
+}
+
+.goUp span{
+    width: 100%;
+    height: 100%;
+    font-size: 45px;
+    color: teal;
+}
+
+/* ========= contact us style =========== */
+#contactUs-panel{
+    width: 100%;
+    height: auto;
+    display: flex;
+    font-family: VazirFont;
+    direction: rtl;
+    background-color: rgb(0, 97, 97);
+}
+
+#contactUs-panel input, textarea{
+    outline: none;
+    border: none;
+    border-bottom:  solid 1px whitesmoke;
+    height: 45px;
+    background-color: transparent;
+}
+
+#contactUs-panel input::placeholder, textarea::placeholder{
+    color: whitesmoke;
+}
+
+#contactUs-panel .forms-contactUs{
+    height: 350px;
+    width: 30%;
+    text-align: right;
+}
+
+.forms-contactUs .child{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forms-contactUs .names{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.names #fName, .names #lName{
+    width: 45%;
+    margin: 0px 5px 10px 5px;
+    color: white;
+}
+
+.names #call-mail{
+    width: 95%;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.child .text-parent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-parent #subject{
+    width: 95%;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.text-parent textarea{
+    color: white;
+    width: 95%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.child button{
+    width: 120px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+
+#contactUs-panel .callInfo{
+    height: 350px;
+    width: 25%;
+}
+
+.callInfo .callInfo-text, .callInfo .social-links{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.callInfo-text div{
+    display: flex;
+    height: 35px;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.callInfo-text span{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.callInfo-text .icons{
+    width: 30px;
+    margin: 0px 20px 0px 5px;
+    color: cornflowerblue;
+
+}
+
+.social-links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.social-links span{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    margin: 3px;
+}
+
+.social-links .linkdin{
+    background-color: rgb(24, 145, 149);
+}
+
+.social-links .faceBook{
+    background-color: rgb(0, 153, 255);
+}
+
+.social-links .instagram{
+    background-color: orange;
+}
+
+.social-links .twitter{
+    background-color: rgb(97, 162, 246);
+}
+
+.social-links .telegram{
+    background-color: rgb(0, 60, 255);
+}
+
+#contactUs-panel .map{
+    height: 350px;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map #map-parent{
+    width: 95%;
+    height: 80%;
+    border: solid 1px whitesmoke;
+}
+
+/* style for copy right */
+.copyRight{
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(46, 46, 46);
+    color: whitesmoke;
+}

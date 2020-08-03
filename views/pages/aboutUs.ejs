@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%> 
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/aboutUs.css">
+    <title>درباره ما</title>
+</head>
+
+<body>
+
+    <div class="home-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <% if (!isLoggedIn) { %>
+                <%- include ("../partial/body-logo.ejs") -%> 
+                <a href="/api/singUp"><button class="singUp-button">ثبت نام</button></a>
+            <% } else { %>
+                <div class="userProfileLogo"> <img src="../../Avatars/<%= isLoggedIn.avatar %>"  alt="logo"> </div>
+                <a href="/api/logout"><button class="singOut-button">خروج</button></a>
+            <% } %> 
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <% if (isLoggedIn) { %>
+                        <div class="inline">
+                            <span class="between"> <i class="fas fa-house-user"></i> </span>
+                            <a class="nav-item nav-link" href="/api/user/dashboard">داشبور شما</a>
+                        </div>
+                    <% } %>
+                    <div class="inline">
+                        <span class="between"> <i class="fas fa-home"></i> </span>
+                        <a class="nav-item nav-link" href="/">صفحه اصلی</a>
+                    </div>
+                    <div class="inline">
+                        <span class="between"> <i class="fas fa-phone"></i> </span>
+                        <a class="nav-item nav-link" href="/#contactUs-panel">تماس با ما</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="aboutMe-panel">
+        <h1>درباره آرتیکل</h1>
+        <video id="aboutMe-video" controls>
+            <source src="../../Videos/aboutMe.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="desc">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et pariatur repellat animi! Distinctio eum ipsum laboriosam eius consequatur, ex numquam saepe ea nihil eaque consequuntur minima necessitatibus, repellat, dicta vel!
+        Similique officia, doloremque est repellat aliquid incidunt id placeat quod non necessitatibus quis excepturi fugit soluta esse, veritatis veniam rerum voluptas neque? Adipisci quis vero non aspernatur officiis, commodi fugiat.
+        At accusamus ad perspiciatis nihil est molestias molestiae quo delectus odit ullam. Iure impedit autem rem? Magnam quae dignissimos repellendus dolores eos officiis corporis laudantium explicabo. Perspiciatis alias praesentium vitae!
+    </div>
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <!-- local file -->
+    <script src="../../JS/aboutUs.js"></script>
+</body>
+
+</html>
