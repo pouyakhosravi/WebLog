@@ -1,6 +1,7 @@
 let letSendRequest;
 
 $(document).ready(function () {
+
     // go to sing up page 
     $(".singUp-button").click(function () {
         $.ajax({
@@ -100,6 +101,56 @@ $(document).ready(function () {
     $(".goUp span").click(function () {
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
+
+    // get all articles
+    $("#seeAllArticle").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/article/all",
+            success: function (allArticle) {
+                window.location.href = window.location.origin + "/api/article/all";
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // get all authors
+    $("#seeAllAouthor").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/user/getAll",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/user/getAll";
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // send to admin message
+    $("#adminMessage").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/api/adminMessage",
+            data: {
+                name: $("#fName").val(),
+                family: $("#lName").val(),
+                mail: $("#call-mail").val(),
+                title: $("#subject").val(),
+                text: $("#context").val()
+            },
+            success: function (message) {
+                alert(message)
+                location.reload();
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    })
 });
 
 function reset(loginInput) {

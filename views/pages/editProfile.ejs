@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%>
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/editProfile.css">
+    <title>صفحه تایید</title>
+</head>
+
+<body>
+
+    <h3>راهنما</h3>
+    <p>هر فیلدی که مایل به تغییر دادن ان هستید را پر کنید و در اخر دکمه ثبت ویرایش را فشار دهید</p>
+
+    <img src="../../Avatars/<%= user.avatar %> " alt="aks">
+
+    <label for="F-name">
+        <div class="title">
+            نام:
+        </div>
+        <div class="field">
+            <input type="text" id="F-name" placeholder="<%= user.firstName %> ">
+        </div>
+    </label>
+    <label for="L-name">
+        <div class="title">
+            نام خوانوادگی:
+        </div>
+        <div class="field">
+            <input type="text" id="L-name" placeholder="<%= user.lastName %> ">
+        </div>
+    </label>
+    <label for="U-name">
+        <div class="title">
+            نام کاربری:
+        </div>
+        <div class="field">
+            <input type="text" id="U-name" placeholder="<%= user.userName %> ">
+        </div>
+    </label>
+    <label for="sex">
+        <div class="title">
+            جنسیت:
+        </div>
+        <div class="field">
+            <input type="text" id="sex" placeholder="<%= user.sex %> " >
+        </div>
+    </label>
+    <label for="phone">
+        <div class="title">
+            شماره:
+        </div>
+        <div class="field">
+            <input type="text" id="phone" placeholder="<%= user.mobile %> ">
+        </div>
+    </label>
+    <label for="country">
+        <div class="title">
+            کشور:
+        </div>
+        <div class="field">
+            <input type="text" id="country" placeholder="<%= user.country %> ">
+        </div>
+    </label>
+    <label for="mail">
+        <div class="title">
+            ایمیل:
+        </div>
+        <div class="field">
+            <input type="text" id="mail" placeholder="<%= user.mail %> ">
+        </div>
+    </label>
+
+    <div class="buttons">
+        <button id="update-profile" onclick="updater()">ثبت ویرایش</button>
+        <a href="/"><button>لغو ویرایش</button></a>
+        <a href="#inputPass"><button id="changePass">تغییر رمز عبور</button></a>
+    </div>
+
+    <div id="inputPass" class="changePassParent" style="display: none;">
+
+        <div class="lastPass-parent">
+            <input type="text" id="last-pass" placeholder="پسوورد فعلی شما">
+        </div>
+        <div class="newPass-parent">
+            <input type="text" id="new-pass" placeholder="پسوورد جدید">
+        </div>
+
+        <span id="updatePass"> <i class="fas fa-check"></i> </span>
+    </div>
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <script src="../../JS/editProfile.js"></script>
+</body>
+
+</html>

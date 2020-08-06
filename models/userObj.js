@@ -88,25 +88,28 @@ UserSchema.pre("save", function (next) {
 //delete last avatar
 UserSchema.pre("findOneAndUpdate", async function (next) {
 
-    try 
+    if(this._update.avatar)
     {
-        let thisUser = await this.findOne({_id: this._conditions._id});
-
-        if(thisUser.avatar !== "userDefault.jpg")
+        try 
         {
-            try 
+            let thisUser = await this.findOne({_id: this._conditions._id});
+    
+            if(thisUser.avatar !== "userDefault.jpg")
             {
-                fs.unlinkSync(path.join(__dirname, `../public/Avatars/${thisUser.avatar}`));
-            } 
-            catch (error) 
-            {
-                console.log("خطا هنگام پاک کردن اواتار قبلی");
+                try 
+                {
+                    fs.unlinkSync(path.join(__dirname, `../public/Avatars/${thisUser.avatar}`));
+                } 
+                catch (error) 
+                {
+                    console.log("خطا هنگام پاک کردن اواتار قبلی");
+                }
             }
+        } 
+        catch (error) 
+        {
+            console.log("خطا: " + error.message);
         }
-    } 
-    catch (error) 
-    {
-        console.log("خطا: " + error.message);
     }
 
     next();

@@ -137,6 +137,7 @@
 
     .notifications-panel{
         right: 130px !important;
+        z-index: 2 !important;
     }
 
     .md-1 {width: 8.33%;}

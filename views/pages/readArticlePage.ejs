@@ -32,6 +32,18 @@
         <span id="ok" article-id="<%= article._id %>" title="تایید"><i class="hvr fas fa-calendar-check"></i></span>
         <span id="no" title="لغو"><i class="hvr fas fa-calendar-times"></i></span>
     </div>
+
+    <h1>قسمت نظرات</h1>
+
+    <div class="commentsList">
+        <% if (comments.length) { %>
+            <% for( let i = 0; i < comments.length; i++ ) { %>
+                <%- include ("../partial/comments-panel.ejs", {comment: comments[i]}) -%> 
+            <% } %>
+        <% } else { %>
+            <h1 class="nothing">هیچ نظری وجود ندارد.</h1>
+        <% } %> 
+    </div>
     
     <script src="/JS/readArticlePage.js"></script>
 </body>

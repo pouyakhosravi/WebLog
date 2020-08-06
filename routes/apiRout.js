@@ -4,13 +4,46 @@ const path = require("path");
 const userRoute = require("./userRout.js");
 const commentRoute = require("./commentRoute.js");
 const articleRoute = require("./articleRoute.js");
+const messageRoute = require("./messageRout.js");
 const userObj = require("../models/userObj.js");
+const messageObj = require("../models/messageObj.js");
 const bcrypt = require('bcryptjs');
 
 //pass to userRout
 router.use("/user", checkSession, userRoute);
 router.use("/article", checkSession, articleRoute);
-// router.use("/api/comment", commentRoute);
+router.use("/comment", checkSession, commentRoute);
+router.use("/message", checkSession, messageRoute);
+
+
+//============ create message ==============
+router.post("/adminMessage", async function (req, res) {
+    
+    try 
+    {
+        if(!req.body.mail)
+        {
+            return res.status(400).send("ایمیل الزامی میباشد.");
+        }
+    
+        const NEW_MESSAGE = new messageObj({
+            name: req.body.name,
+            family: req.body.family,
+            email: req.body.mail,
+            title: req.body.title,
+            text: req.body.text
+        });
+    
+        await NEW_MESSAGE.save();
+
+        return res.send("ثبت پیام با موفقیت انجام شد.")
+    } 
+    catch (error) 
+    {
+        res.status(500).send("خطا هنگام سیو پیام کاربر");
+    }
+
+})
 
 
 // ========= about us ============
@@ -161,7 +194,7 @@ function checkSession(req, res, next) {
     }
     else if(!req.session.user && req.params)
     {
-        if((req.url).split("/")[1] !== "FindUser")
+        if((req.url).split("/")[1] !== "FindUser" && req.url !== "/all" && (req.url).split("/")[1] !== "publicReadPage" && req.url !== "/" && req.url !== "/getAll")
         {
             return res.redirect("/");
         }

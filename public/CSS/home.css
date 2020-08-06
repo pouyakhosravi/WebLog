@@ -411,8 +411,18 @@ body , html{
     position: absolute;
     width: 100%;
     height: auto;
-    display: flex;
+    display: inline-grid;
     justify-content: center;
+}
+
+.circle .circleContent p{
+    text-align: center;
+}
+
+.circle .circleContent .counter{
+    margin-top: 5px;
+    font-size: 60px;
+    font-weight: bolder;
 }
 
 .authorCount .circleContent{

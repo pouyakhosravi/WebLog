@@ -91,6 +91,7 @@
             <div class="circle">
                 <div class="circleContent">
                     <p>تعداد مقالات:</p>
+                    <p class="counter"><%= articleCount %> </p>
                 </div>
                 <button id="seeAllArticle">دیدن همه مقاله ها</button>
             </div>
@@ -99,6 +100,7 @@
             <div class="circle">
                 <div class="circleContent">
                     <p>تعداد بازدید از سایت:</p>
+                    <p class="counter"><%= visitCount %> </p>
                 </div>
             </div>
         </div>
@@ -106,6 +108,7 @@
             <div class="circle">
                 <div class="circleContent">
                     <p>تعداد نویسندگان سایت:</p>
+                    <p class="counter"><%= userCount %> </p>
                 </div>
                 <button id="seeAllAouthor">دیدن همه نویسندگان</ذ>
             </div>
@@ -124,7 +127,7 @@
                     <input id="subject" type="text" placeholder="عنوان پیام:">
                     <textarea id="context" type="text" placeholder="متن پیام:"></textarea>
                 </div>
-                <button>ارسال پیام</button>
+                <button id="adminMessage">ارسال پیام</button>
             </div>
         </div>
         <div class="callInfo lg-6 sm-12">

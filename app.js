@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const apiRout = require("./routes/apiRout.js");
 const path = require("path");
+const counterObj = require("./models/counterObj.js");
+const articleObj = require("./models/articleObj.js");
+const userObj = require("./models/userObj.js");
 require("./tools/initialization.js");
 
 // view engine setup
@@ -59,8 +62,15 @@ app.use(function(req, res, next) {
 app.use("/api", apiRout);
 
 // get home page
-app.get("/", function (req, res) {
-    res.render( path.join(__dirname, "/views/pages/home.ejs"), {isLoggedIn: req.session.user} );
+app.get("/", async function (req, res) {
+
+    let visitCounter = await counterObj.findOneAndUpdate({}, {$inc: { visitCount: 1 }});
+
+    let articlesCount = await articleObj.countDocuments({letShow: true});
+
+    let usersCount = await userObj.countDocuments();
+
+    res.render( path.join(__dirname, "/views/pages/home.ejs"), {isLoggedIn: req.session.user, userCount: usersCount, articleCount: articlesCount, visitCount: visitCounter.visitCount} );
 });
 
 //set port for my app

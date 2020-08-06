@@ -14,23 +14,26 @@
 
         <% if (user.role === "admin") { %>
             <div class="notifications-panel">
-                <div title="مقاله های تایید نشده" class="hvr circle-not article-not">
+                <div id="article-notApproved" title="مقاله های تایید نشده" class="hvr circle-not article-not">
                     <i class="fas fa-book"></i>
                     <% if (articleCount > 0) { %>
                         <div class="iconNot"><%= articleCount %> </div>
                     <% } %>
                 </div>
-                <div title="کامنت های تایید نشده" class="hvr circle-not comment-not">
+                <div id="comment-notApproved" title="کامنت های تایید نشده" class="hvr circle-not comment-not">
                     <i class="fa fa-comment"></i>
-                    <% if (user) { %>
-                        <div class="iconNot">2</div>
+                    <% if (commentCount > 0) { %>
+                        <div class="iconNot"><%= commentCount %> </div>
                     <% } %>
                 </div>
-                <div title="پیام های خوانده نشده" class="hvr circle-not message-not">
+                <div id="message-notRead" title="پیام های خوانده نشده" class="hvr circle-not message-not">
                     <i class="fa fa-envelope"></i>
-                    <% if (user) { %>
-                        <div class="iconNot">3</div>
+                    <% if (messageCount) { %>
+                        <div class="iconNot"><%= messageCount %> </div>
                     <% } %>
+                </div>
+                <div id="users-list" title="لیست تمام کاربران سایت" class="hvr circle-not message-not">
+                    <i class="fa fa-users"></i>
                 </div>
             </div>
         <% } %>
@@ -49,7 +52,7 @@
             <div class="rightTools md-6">
                 <div class=" yourAvatar">
                     <img  src="../../Avatars/<%=user.avatar %>"  alt="avatar">
-                    <button id="seeProfile" class="avatarButtons">مشاهده پروفایل</button>
+                    <button id="seeProfile" class="avatarButtons">ویرایش پروفایل</button>
                     <label for="chooseFile" id="addAvatar" class="hvr avatarButtons">افزودن آواتار</label>
                     <input name="myAvatar" type="file" id="chooseFile" style="display: none;">
                     <span title="ثبت نهایی آواتار" id="submitAvatar" class="hvr avatarButtons"> <i class="fas fa-check"></i> </span>
@@ -82,7 +85,7 @@
             </div>
             <div id="link5" class="inline">
                 <span class="between"> <i class="fas fa-user-cog"></i> </span>
-                <a href="#">ویرایش پروفایل</a>
+                <a href="/api/user/editProfile">ویرایش پروفایل</a>
             </div>
             <div id="link6" class="inline">
                 <span class="between"> <i class="fas fa-sign-out-alt"></i> </span>

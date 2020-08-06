@@ -2,6 +2,35 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const articleObj = require("../models/articleObj.js");
+const commentObj = require("../models/commentObj.js");
+const userObj = require("../models/userObj.js");
+
+// send confirm page
+router.get("/allNotApproved", function (req, res) {
+    articleObj.find({letShow: false}).populate("author", {firstName: 1, lastName: 1}).exec((err, articles) => {
+        if(err) return res.status(500).send("خطا هنگام دریافت مقاله های تایید نشده.");
+
+        res.render( path.join(__dirname, "../views/pages/confirmPage.ejs"), {comments: "", articles: articles, messages: "", users: ""} )
+    })
+});
+
+
+// get all article
+router.get("/all", function (req, res) {
+
+    articleObj.find({letShow: true}).sort({createdAt: -1}).populate("author", {firstName: 1, lastName: 1, avatar: 1, createdAt: 1}).exec(function (err, articles) {
+        if(err)
+        {
+            return res.status(500).send("خطا هنگام دریافت تمام مقاله ها");
+        }
+        else
+        {
+            return res.render( path.join(__dirname, "../views/pages/all.ejs"), {articles: articles, users: ""} );
+        }
+    })
+
+})
+
 
 
 // get crate page
@@ -9,23 +38,56 @@ router.get("/newArticle", function (req, res) {
     return res.render( path.join(__dirname, "../views/pages/newArticle.ejs") );
 });
 
-// ger read article page
+
+
+// get read article page
 let article;
+let articleID;
 router.get("/readArticle/:articleID", async function (req, res) {
 
     try 
     {
-        let articleID = req.params.articleID;
+        articleID = req.params.articleID;
+
+        let comments = await commentObj.find({article: articleID, letShow: true});
+
         article = await articleObj.findById(articleID);
 
-        return res.render( path.join(__dirname, "../views/pages/readArticlePage.ejs"), {article: article} )
+        return res.render( path.join(__dirname, "../views/pages/readArticlePage.ejs"), {article: article, comments: comments} )
     } 
     catch (error) 
     {
+        console.log(error);
         res.status(500).send("خطا هنگام دریافت این مقاله")
     }
     
 });
+
+router.get("/publicReadPage/:articleID", async function (req, res) {
+    articleID = req.params.articleID;
+    let comments;
+
+    // get comments this article
+    try 
+    {
+        comments = await commentObj.find({article: articleID, letShow: true});
+    } 
+    catch (error) 
+    {
+        return res.status(500).send("خطا هنگام دریافت کامت ها");
+    }
+
+    articleObj.findById(articleID).populate("author", {firstName: 1, lastName: 1, sex: 1, avatar: 1}).exec(function (err, article) {
+        if(err)
+        {
+            res.status(500).send("خطا هنگام دریافت مقاله");
+        }
+        else
+        {
+            res.render( path.join(__dirname, "../views/pages/read&comment.ejs"), {article: article, comments: comments} );
+        }
+    })
+})
 
 // create Article
 router.post("/", function (req, res) {
@@ -61,8 +123,21 @@ router.post("/", function (req, res) {
         })
 });
 
+router.put("/submit", async (req, res) => {
+    articleID = req.body.id;
+    try 
+    {
+        await articleObj.findByIdAndUpdate({_id: articleID}, {letShow: true});
+
+        return res.send("مقاله با موفقیت تایید شد");
+    } 
+    catch (error) 
+    {
+        res.status(500).send("خطا هنگام تایید مقاله");
+    }
+});
+
 // update article
-let articleID;
 router.put("/", async function (req, res) {
     try 
     {
@@ -78,6 +153,8 @@ router.put("/", async function (req, res) {
 
 });
 
+
+// delete article
 router.delete("/:articleID", (req, res) => {
     articleID = req.params.articleID;
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%> 
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/all.css">
+    <title>تمام سند ها</title>
+</head>
+
+<body>
+
+    <% if (articles) { %>
+        <h1 class="head">تمام مقاله های نوشته شده در سایت</h1>
+
+        <div class="all-parent">
+            <% if (articles.length) { %>
+                <% for( let i = 0; i < articles.length; i++ ) { %>
+                    <%- include ("../partial/allArticle-cards.ejs", {articleInfo: articles[i]}) -%> 
+                <% } %>
+            <% } %>
+        </div>
+    <% } else { %>
+        <h1 class="head">تمام نویسندگان عضو در سایت</h1>
+
+        <div class="all-parent">
+            <% if (users.length) { %>
+                <% for( let i = 0; i < users.length; i++ ) { %>
+                    <!-- show info panel -->
+                    <div class="card authorCard mb-3" style="max-width: 540px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/Avatars/<%= users[i].avatar %>" class="card-img image" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%= users[i].firstName + " " + users[i].lastName%></h5>
+                                    <p class="card-text"><%= users[i].sex %> </p>
+                                    <p class="card-text"><%= users[i].country %> </p>
+                                    <p class="card-text"><small class="text-muted"><%= users[i].userName %> </small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        </div>
+    <% } %> 
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <script src="../../JS/all.js"></script>
+</body>
+
+</html>

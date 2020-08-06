@@ -240,6 +240,76 @@ $(document).ready(function () {
         });
     });
 
+    // get confirm articles page
+    $("#article-notApproved").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/article/allNotApproved",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/article/allNotApproved"
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // get confirm comments page
+    $("#comment-notApproved").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/comment",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/comment"
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // get confirm message page
+    $("#message-notRead").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/message/allMessage",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/message/allMessage"
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // get all user list for admin
+    $("#users-list").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/api/user/allUserForAdmin",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/user/allUserForAdmin"
+            },
+            error: function (err) {
+                alert(err.responseText);
+            }
+        });
+    });
+
+    // editProfile
+    $("#seeProfile").click(() => {
+        $.ajax({
+            type: "GET",
+            url: "/api/user/editProfile",
+            success: function (response) {
+                window.location.href = window.location.origin + "/api/user/editProfile";
+            },
+            error: (err) => {
+                console.log(err.responseText);
+            }
+        });
+    })
+
 });
 
 // show time in dashboard

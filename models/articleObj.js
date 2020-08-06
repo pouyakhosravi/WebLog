@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const ArticleSchema = new mongoose.Schema({
+const ArticleSchema = new Schema({
     author: {
-        type: mongoose.Schema.Types.ObjectID,
+        type: Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     description: {

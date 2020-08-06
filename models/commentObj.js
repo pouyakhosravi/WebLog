@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const CommentsSchema = new mongoose.Schema({
+const CommentsSchema = new Schema({
     text: {
         type: String,
         maxlength: 1000,
@@ -16,9 +17,10 @@ const CommentsSchema = new mongoose.Schema({
         default: false
     },
     article: {
-        type: mongoose.Schema.Types.ObjectID,
+        type: Schema.Types.ObjectId,
+        ref: "Article",
         required: true,
     }
 });
 
-module.exports = mongoose.model("Comments", CommentsSchema, "CommentsInfo")
+module.exports = mongoose.model("Comments", CommentsSchema, "commentsInfo")

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ("../partial/headTag.ejs") -%>
+    <!-- local css -->
+    <link rel="stylesheet" href="../../CSS/confirmPage.css">
+    <title>صفحه تایید</title>
+</head>
+
+<body>
+
+    <% if (articles) { %>
+        <h1>مقاله های تایید نشده</h1>
+        <table class="table table-striped table-dark">
+            <tr>
+                <th scope="col" class="hashtag">#</th>
+                <th scope="col" class="names">نویسنده</th>
+                <th scope="col" style="width: 70%;">توضیحات</th>
+                <th scope="col" class="tools">ابزار</th>
+            </tr>
+            <% for( let i = 0; i < articles.length; i++ ) { %>
+                <tr>
+                    <td scope="row"><%= (i+1) %> </td>
+                    <td><%= articles[i].author.firstName + " " + articles[i].author.lastName %> </td>
+                    <td><%= articles[i].description %> </td>
+                    <td class="icons"><span> <i onclick="submitArticle('<%= articles[i]._id %>')" title="تایید" id="submit-article" class="hvr fa fa-check"></i> </span> <span> <i onclick="deleteArticle('<%= articles[i]._id %>')" id="delete-article" title="حذف" class="hvr fa fa-close"></i> </span> <span> <i onclick="readArticle('<%= articles[i]._id %>')" id="read-article" title="دیدن این مقاله" class="hvr fas fa-book-reader"></i> </span></td>
+                </tr>
+            <% } %>
+        </table>
+    <% } else if ( comments ) {%>
+        <h1>نظرات تایید نشده</h1>
+        <table class="table table-striped table-dark">
+            <tr>
+                <th scope="col" class="hashtag">#</th>
+                <th scope="col" class="names">نام و نام خانوادگی</th>
+                <th scope="col" style="width: 60%;">متن</th>
+                <th scope="col" class="tools">ابزار</th>
+            </tr>
+            <% for( let i = 0; i < comments.length; i++ ) { %>
+                <tr>
+                    <td scope="row"><%= (i+1) %> </td>
+                    <td><%= comments[i].whoIs %> </td>
+                    <td><%= comments[i].text %> </td>
+                    <td class="icons"><span> <i onclick="submitComment('<%= comments[i]._id %>')" title="تایید" id="submitComment" class="hvr fa fa-check"></i> </span> <span> <i onclick="deleteComment('<%= comments[i]._id %>')" title="حذف" id="deleteComment" class="hvr fa fa-close"></i></td>
+                </tr>
+            <% } %>
+        </table>
+    <% } else if (messages) { %>
+        <h1>پیام ها</h1>
+        <table class="table table-striped table-dark">
+            <tr>
+                <th scope="col" class="hashtag">#</th>
+                <th scope="col" class="names">نام و نام خانوادگی</th>
+                <th scope="col">عنوان</th>
+                <th scope="col">ایمیل</th>
+                <th scope="col">متن</th>
+                <th scope="col" class="tools">ابزار</th>
+            </tr>
+            <% for( let i = 0; i < messages.length; i++ ) { %>
+                <tr>
+                    <td scope="row"><%= (i+1) %> </td>
+                    <td><%= messages[i].name + " " + messages[i].family %> </td>
+                    <td><%= messages[i].title %> </td>
+                    <td><%= messages[i].email %> </td>
+                    <td><%= messages[i].text %> </td>
+                    <td class="icons"><span> <i  title="جواب به این پیام" id="submitMessage" class="hvr fa fa-mail-reply"></i> </span> <span> <i onclick="deleteMessage('<%= messages[i]._id %>')" title="حذف" id="deleteMessage" class="hvr fa fa-close"></i></td>
+                </tr>
+            <% } %>
+        </table>
+    <% } else { %>
+        <h1>لیست کاربران سایت</h1>
+        <table class="table table-striped table-dark">
+            <tr>
+                <th scope="col" class="hashtag">#</th>
+                <th scope="col" class="names">نام و نام خانوادگی</th>
+                <th scope="col">جنسیت</th>
+                <th scope="col">موبایل</th>
+                <th scope="col">ایمیل</th>
+                <th scope="col" class="tools">ابزار</th>
+            </tr>
+            <% for( let i = 0; i < users.length; i++ ) { %>
+                <tr>
+                    <td scope="row"><%= (i+1) %> </td>
+                    <td><%= users[i].firstName + " " + users[i].lastName %> </td>
+                    <td><%= users[i].sex %> </td>
+                    <td><%= users[i].mobile %> </td>
+                    <td><%= users[i].mail %> </td>
+                    <td class="icons"><span> <i onclick="passUpdater('<%= users[i]._id %>')"  title="به روز رسانی رمز عبور این کاربر" id="updatePass" class="hvr fas fa-upload"></i> </span> <span> <i onclick="deleteUser('<%= users[i]._id %>')" title="حذف" id="deleteUser" class="hvr fa fa-close"></i></td>
+                </tr>
+            <% } %>
+        </table>
+    <% } %> 
+
+    <%- include ("../partial/body-script.ejs") -%>
+    <script src="../../JS/confirmPage.js"></script>
+</body>
+
+</html>

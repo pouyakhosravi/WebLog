@@ -44,7 +44,8 @@ $(document).ready(function () {
 
         $('.text').summernote({
             focus: true,
-            height: 400
+            height: 350,
+            width: "100%"
         });
     });
 
