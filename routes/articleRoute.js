@@ -3,19 +3,20 @@ const router = express.Router();
 const path = require("path");
 const articleObj = require("../models/articleObj.js");
 const commentObj = require("../models/commentObj.js");
-const userObj = require("../models/userObj.js");
+const accessControl = require("../tools/accessControl.js");
+const ACCESS_CONTROL = require("../tools/accessControl.js");
 
 // send confirm page
-router.get("/allNotApproved", function (req, res) {
+router.get("/allNotApproved", accessControl.checkAdmin,  function (req, res) {
     articleObj.find({letShow: false}).populate("author", {firstName: 1, lastName: 1}).exec((err, articles) => {
         if(err) return res.status(500).send("خطا هنگام دریافت مقاله های تایید نشده.");
 
-        res.render( path.join(__dirname, "../views/pages/confirmPage.ejs"), {comments: "", articles: articles, messages: "", users: ""} )
+        res.render( path.join(__dirname, "../views/pages/confirmPage.ejs"), {comments: "", articles: articles, messages: "", users: ""} );
     })
 });
 
 
-// get all article
+// get all article for show every one
 router.get("/all", function (req, res) {
 
     articleObj.find({letShow: true}).sort({createdAt: -1}).populate("author", {firstName: 1, lastName: 1, avatar: 1, createdAt: 1}).exec(function (err, articles) {
@@ -27,17 +28,15 @@ router.get("/all", function (req, res) {
         {
             return res.render( path.join(__dirname, "../views/pages/all.ejs"), {articles: articles, users: ""} );
         }
-    })
+    });
 
-})
-
+});
 
 
 // get crate page
 router.get("/newArticle", function (req, res) {
     return res.render( path.join(__dirname, "../views/pages/newArticle.ejs") );
 });
-
 
 
 // get read article page
@@ -87,7 +86,8 @@ router.get("/publicReadPage/:articleID", async function (req, res) {
             res.render( path.join(__dirname, "../views/pages/read&comment.ejs"), {article: article, comments: comments} );
         }
     })
-})
+});
+
 
 // create Article
 router.post("/", function (req, res) {
@@ -103,12 +103,18 @@ router.post("/", function (req, res) {
             return res.status(500).send("خلاصه مقاله باید کمتر از 1000 کاراکتر باشد.")
         }
 
+
         // save to db
-        const NEW_ARTICLE = new articleObj({
+        let NEW_ARTICLE = new articleObj({
             author: req.session.user._id,
             description: req.body.title,
             text: req.body.content
         });
+
+        if(req.session.user.role === "admin")
+        {
+            NEW_ARTICLE.letShow = true;
+        }
 
         NEW_ARTICLE.save(function (err, user) {
             if(err)
@@ -123,7 +129,9 @@ router.post("/", function (req, res) {
         })
 });
 
-router.put("/submit", async (req, res) => {
+
+// just admin can confirm a article 
+router.put("/submit", ACCESS_CONTROL.checkAdmin, async (req, res) => {
     articleID = req.body.id;
     try 
     {
@@ -150,7 +158,6 @@ router.put("/", async function (req, res) {
         console.log(error);
         res.status(500).send("خطا هنگام اپیدیت مقاله");
     }
-
 });
 
 

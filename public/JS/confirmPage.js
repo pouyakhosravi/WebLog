@@ -98,8 +98,9 @@ function deleteMessage(ID) {
     }
 }
 
-// delete message
+// delete user
 function deleteUser(ID) {
+    console.log(ID);
     if( confirm("آیا از حذف این کاربر اطمینان دارید؟") )
     {
         $.ajax({

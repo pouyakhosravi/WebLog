@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const articleObj = require("../models/articleObj.js");
-const userObj = require("../models/userObj.js");
-const commentObj = require("../models/commentObj");
-const { resolve } = require("path");
-const { rejects } = require("assert");
+const commentObj = require("../models/commentObj.js");
+const accessControl = require("../tools/accessControl.js");
 
+
+// set comment
 router.post("/", function (req, res) {
     if(!req.body.whoIs || !req.body.text)
     {
@@ -31,19 +30,19 @@ router.post("/", function (req, res) {
     })
 });
 
+
 // sent all comment to confirm
-router.get("/", function (req, res) {
+router.get("/", accessControl.checkAdmin, function (req, res) {
     commentObj.find({letShow: false}, function (err, comments) {
         if(err) return res.status(500).send("خطا هنگام دریافت کامنت های تایید نشده.");
 
         res.render( path.join(__dirname, "../views/pages/confirmPage.ejs"), {comments: comments, articles: "", messages: "", users: ""} )
-        
     })
 });
 
 
 //submit comment
-router.put("/submit", (req, res) => {
+router.put("/submit", accessControl.checkAdmin, (req, res) => {
     let commentID = req.body.id;
 
     // ========= use of promise solution for this work ============
@@ -66,8 +65,9 @@ router.put("/submit", (req, res) => {
     } )
 });
 
+
 // delete Comment
-router.delete("/:commentID", async (req, res) => {
+router.delete("/:commentID", accessControl.checkAdmin, async (req, res) => {
     try 
     {
         await commentObj.findByIdAndDelete(req.params.commentID);

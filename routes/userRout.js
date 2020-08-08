@@ -5,24 +5,14 @@ const userObj = require("../models/userObj.js");
 const articleObj = require("../models/articleObj.js");
 const commentObj = require("../models/commentObj.js");
 const messageObj = require("../models/messageObj.js");
-const multer = require("multer");
+const accessControl = require("../tools/accessControl.js");
+const generalTools = require("../tools/generalTools.js");
 const bcrypt = require('bcryptjs');
 
 
-// for use multer
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "public/Avatars");
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname);
-    }
-});
-const uploadAvatar = multer({storage: storage});
-
 // uploadAvatar
 router.put("/uploadAvatar", function (req, res) {
-    const upload = uploadAvatar.single("avatar");
+    const upload = generalTools.uploadAvatar.single("avatar");
 
     upload(req, res, function (err) {
         if(err)
@@ -119,7 +109,7 @@ router.put("/updatePassword", async (req, res) => {
 
 // update password from admit
 let userID;
-router.put("/adminUpdater", async (req, res) => {
+router.put("/adminUpdater", accessControl.checkAdmin, async (req, res) => {
 
     try 
     {
@@ -146,7 +136,14 @@ router.put("/adminUpdater", async (req, res) => {
 
 // get edit profile page
 router.get("/editProfile", (req, res) => {
-    res.render( path.join(__dirname, "../views/pages/editProfile.ejs"), {user: req.session.user} );
+    let user = req.session.user
+    if(user)
+    {
+        delete user.password;
+        delete user.__v;
+    }
+
+    res.render( path.join(__dirname, "../views/pages/editProfile.ejs"), {user: user} );
 })
 
 // get dashboard page
@@ -161,7 +158,14 @@ router.get("/dashboard", async function (req, res) {
         let commentCount = await commentObj.countDocuments({letShow: false});
         let messageCount = await messageObj.countDocuments({read: false});
 
-        res.render( path.join(__dirname, "../views/pages/dashboard.ejs"), {user: req.session.user, articles: articles, articleCount: articleCount, messageCount: messageCount, commentCount: commentCount} )
+        let user = req.session.user;
+        if(user)
+        {
+            delete user.password;
+            delete user.__v;
+        }
+
+        res.render( path.join(__dirname, "../views/pages/dashboard.ejs"), {user: user, articles: articles, articleCount: articleCount, messageCount: messageCount, commentCount: commentCount} )
     } 
     catch (error) 
     {
@@ -169,11 +173,18 @@ router.get("/dashboard", async function (req, res) {
     }
 });
 
+
 // get all user
 router.get("/getAll", async function (req, res) {
     try 
     {
-        let users = await userObj.find();
+        let users = await userObj.find().lean();
+
+        for(let i = 0; i < users.length; i++)
+        {
+            delete users[i].__v;
+            delete users[i].password;
+        }
 
         res.render( path.join(__dirname, "../views/pages/all.ejs"), {users: users, articles: ""} );
     } 
@@ -185,7 +196,7 @@ router.get("/getAll", async function (req, res) {
 
 
 //get all suer for admin 
-router.get("/allUserForAdmin", async function (req, res) {
+router.get("/allUserForAdmin", accessControl.checkAdmin, async function (req, res) {
     try 
     {
         let users = await userObj.find({role: "blogger"});
@@ -216,11 +227,11 @@ router.get("/FindUser/:username", async function (req, res) {
             
             if(findDuplicateUserName)
             {
-                res.send(true);
+                return res.send(true);
             }
             else
             {
-                res.send(false);
+                return res.send(false);
             }
         }
     } 
@@ -230,14 +241,17 @@ router.get("/FindUser/:username", async function (req, res) {
     }
 });
 
-router.delete("/deleteUser/:userID", async (req, res) => {
+
+// delete user from admin
+router.delete("/deleteUser/:userID", accessControl.checkAdmin, async (req, res) => {
 
     userID = req.params.userID;
     try 
     {
-        await userObj.findByIdAndDelete(userId);
+        let user = await userObj.findByIdAndDelete(userID);
+        await articleObj.remove({author: user._id});
 
-        return res.send("کاربر بار موفقیت حذف شد");
+        return res.send("کاربر و مقاله های آن با موفقیت حذف شد");
     } 
     catch (error) 
     {

@@ -1,3 +1,4 @@
+// use ful modules
 const express = require("express");
 const router = express.Router();
 const path = require("path");
@@ -8,6 +9,7 @@ const messageRoute = require("./messageRout.js");
 const userObj = require("../models/userObj.js");
 const messageObj = require("../models/messageObj.js");
 const bcrypt = require('bcryptjs');
+const accessControl = require("../tools/accessControl.js");
 
 //pass to userRout
 router.use("/user", checkSession, userRoute);
@@ -16,14 +18,23 @@ router.use("/comment", checkSession, commentRoute);
 router.use("/message", checkSession, messageRoute);
 
 
-//============ create message ==============
-router.post("/adminMessage", async function (req, res) {
+//message for admin
+router.post("/adminMessage", accessControl.messageAccess, async function (req, res) {
     
     try 
     {
         if(!req.body.mail)
         {
             return res.status(400).send("ایمیل الزامی میباشد.");
+        }
+
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(req.body.mail))
+        {
+            // noo any work if email be valid
+        }
+        else
+        {
+            return res.status(400).send("ایمیل وارد شده صحیح نمیباشد.");
         }
     
         const NEW_MESSAGE = new messageObj({
@@ -43,18 +54,24 @@ router.post("/adminMessage", async function (req, res) {
         res.status(500).send("خطا هنگام سیو پیام کاربر");
     }
 
-})
+});
 
 
-// ========= about us ============
+// get about us page
 router.get("/aboutUs", function (req, res) {
-    res.render( path.join(__dirname, "../views/pages/aboutUs.ejs"), {isLoggedIn: req.session.user} );
-})
+    
+    let user = req.session.user;
+    if(user)
+    {
+        delete user.password;
+        delete user.__v;
+    }
+
+    res.render( path.join(__dirname, "../views/pages/aboutUs.ejs"), {isLoggedIn: user} );
+});
 
 
-//==============LOGIN==================
-
-//login
+//login to dashboard
 router.post("/logIn", isLoggedIn, async function (req, res) {
     try 
     {
@@ -97,13 +114,10 @@ router.get("/logout", function (req, res) {
 });
 
 
-//===============SING UP=================
-
 //get singUp page
 router.get("/singUp", isLoggedIn, function (req, res) {
     res.render( path.join(__dirname, "../views/pages/singUp.ejs"));
 });
-
 
 
 //create new blogger

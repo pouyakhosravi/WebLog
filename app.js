@@ -50,9 +50,10 @@ app.use(session({
     }
 }));
 
-// check request for compar cookies on client and session on server
+// check request for compare cookies on client and session on server
 app.use(function(req, res, next) {
-	if (req.cookies.user_sid && !req.session.user) {
+    if (req.cookies.user_sid && !req.session.user)
+    {
 		res.clearCookie("user_sid");
 	};
 	next();
@@ -65,9 +66,7 @@ app.use("/api", apiRout);
 app.get("/", async function (req, res) {
 
     let visitCounter = await counterObj.findOneAndUpdate({}, {$inc: { visitCount: 1 }});
-
     let articlesCount = await articleObj.countDocuments({letShow: true});
-
     let usersCount = await userObj.countDocuments();
 
     res.render( path.join(__dirname, "/views/pages/home.ejs"), {isLoggedIn: req.session.user, userCount: usersCount, articleCount: articlesCount, visitCount: visitCounter.visitCount} );
@@ -76,4 +75,4 @@ app.get("/", async function (req, res) {
 //set port for my app
 app.listen(3000, function () {
     console.log("Server Started On Port: 3000");
-})
+});

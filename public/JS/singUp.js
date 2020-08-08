@@ -1,6 +1,7 @@
 var countriesInformation;
 let letSendRequest;
 $(document).ready(function () {
+
     //get countries information
     $.ajax({
         type: "GET",
@@ -30,7 +31,7 @@ $(document).ready(function () {
         $("#password").attr("type","password");
         $("#showPass").removeClass("far fa-eye-slash").addClass("fas fa-eye");
     });
-    //-show retry pass field
+    //show retry pass field
     $("#showRetryPass").mousedown(function () {
         $("#retryPassword").attr("type","text");
         $("#showRetryPass").removeClass("fas fa-eye").addClass("far fa-eye-slash");
