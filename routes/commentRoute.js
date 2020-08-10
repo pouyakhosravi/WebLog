@@ -18,6 +18,14 @@ router.post("/", function (req, res) {
         article: req.body.articleID
     });
 
+    if(req.session.user)
+    {
+        if(req.session.user.role === "admin")
+        {
+            NEW_COMMENT.letShow = true;
+        }
+    }
+
     NEW_COMMENT.save(function (err, comment) {
         if(err)
         {
@@ -25,7 +33,16 @@ router.post("/", function (req, res) {
         }
         else
         {
-            return res.send("نظر شما در انتظار تایید میباشد");
+            if(req.session.user)
+            {
+                if(req.session.user.role !== "admin") return res.send("نظر شما در انتظار تایید میباشد");
+            
+                return res.send("نظر شما ثبت شد");
+            }
+            else
+            {
+                return res.send("نظر شما در انتظار تایید میباشد");
+            }
         }
     })
 });

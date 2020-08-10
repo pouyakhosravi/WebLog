@@ -249,9 +249,10 @@ router.delete("/deleteUser/:userID", accessControl.checkAdmin, async (req, res) 
     try 
     {
         let user = await userObj.findByIdAndDelete(userID);
-        await articleObj.remove({author: user._id});
+        let indentArticle = await articleObj.findOneAndDelete({author: user._id});
+        await commentObj.remove({article: indentArticle._id});
 
-        return res.send("کاربر و مقاله های آن با موفقیت حذف شد");
+        return res.send("کاربر و مقاله و کامنت های آن با موفقیت حذف شد");
     } 
     catch (error) 
     {

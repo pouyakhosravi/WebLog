@@ -5,6 +5,7 @@
     <%- include ("../partial/headTag.ejs") -%> 
     <!-- local css -->
     <link rel="stylesheet" href="../../CSS/home.css">
+    <link rel="stylesheet" href="../../CSS/chatPanel.css">
     <title>صفحه اصلی</title>
 </head>
 
@@ -163,6 +164,33 @@
 
     <div class="goUp">
         <span title="رفتن به اول صفحه" class="hvr fa fa-arrow-circle-up"> </span>
+    </div>
+
+    <div class="chatPanel">
+        <div class="chatPanel-header">
+            <span class="hvr closeChat"> <i class="fas fa-close"></i> </span>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    افراد آنلاین
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <!-- <a class="dropdown-item" href="#">Action</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="chatPanel-body">
+
+        </div>
+        <div class="chatPanel-footer">
+            <div title="چت روم همگانی" class="showChat-button">
+                <i class="fa fa-wechat"></i>
+            </div>
+            <button id="goToChat">ورود به چت</button>
+            <button id="send-note">ارسال پیام</button>
+            <textarea class="inputText" placeholder="نام خود را وارد کنید"></textarea>
+        </div>
     </div>
 
     <%- include ("../partial/body-script.ejs") -%>

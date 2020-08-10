@@ -1,6 +1,7 @@
 //require useFul modules
 const express = require("express");
 const app = express();
+const server = require("http").createServer(app);
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
@@ -11,6 +12,11 @@ const counterObj = require("./models/counterObj.js");
 const articleObj = require("./models/articleObj.js");
 const userObj = require("./models/userObj.js");
 require("./tools/initialization.js");
+
+// create socketIo server in backend side
+const socketIo = require("socket.io");
+const { allowedNodeEnvironmentFlags } = require("process");
+const serverSocket = socketIo(server);
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -72,7 +78,54 @@ app.get("/", async function (req, res) {
     res.render( path.join(__dirname, "/views/pages/home.ejs"), {isLoggedIn: req.session.user, userCount: usersCount, articleCount: articlesCount, visitCount: visitCounter.visitCount} );
 });
 
+// socket io req and res
+serverSocket.on("connection", (socket) => {
+
+    let allUserOnline;
+    // for log in user
+    socket.on("login", (name) => {
+        socket.myName = name.name;
+
+        let all = serverSocket.sockets.clients().connected;
+        all = Object.values(all);
+        allUserOnline = all.map(s => s.myName);
+
+        socket.emit("successLogin", (name.name + " شما وارد چت روم شدید"));// send for same user success result
+        socket.broadcast.emit('newUser', (name.name + " وارد چت روم شد"));//send to all user that new user logged in
+        serverSocket.emit("addToOnlineList", allUserOnline);        
+    });
+
+    // for logOut user
+    socket.on("logOut", (name) => {
+        socket.disconnect();
+
+        let all = serverSocket.sockets.clients().connected;
+        all = Object.values(all);
+        allUserOnline = all.map(s => s.myName);
+
+        socket.emit("successLogOut", (name.name + " شما از چت روم خارج شدید"));// send for same user success result
+        socket.broadcast.emit('oldUser', (name.name + " از چت  روم خارج شد."));//send to all user that new user logged in
+        serverSocket.emit("removeFromOnlineList", allUserOnline);
+
+    });
+
+    //for new message
+    socket.on("message", (msgData) => {
+        socket.broadcast.emit("newMessage", msgData);
+    });
+
+    // for close
+    socket.on("disconnect", () => {
+        if(socket.id)
+        {
+            console.log(socket.id, "disconnected");
+        }
+    });
+    
+});
+
+
 //set port for my app
-app.listen(3000, function () {
+server.listen(3000, function () {
     console.log("Server Started On Port: 3000");
 });
